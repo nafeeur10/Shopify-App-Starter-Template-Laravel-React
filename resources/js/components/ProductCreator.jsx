@@ -1,14 +1,13 @@
 import { useCallback, useState } from "react";
 import useAxios from "../hooks/useAxios";
-import { Layout, RangeSlider } from "@shopify/polaris";
+import { Button, FormLayout, Layout, RangeSlider } from "@shopify/polaris";
 
 const ProductCreator = () => {
     const { axios } = useAxios();
     const [options, setOptions] = useState({ count: 5 });
 
     const handleCountChange = useCallback(
-        (value, name) =>
-            setOptions((prevOptions) => ({ ...prevOptions, [name]: value })),
+        value => setOptions(prevOptions => ({ ...prevOptions, count: value })),
         []
     );
 
@@ -39,7 +38,6 @@ const ProductCreator = () => {
                     <Button
                         primary
                         size="large"
-                        loading={creatingProducts}
                         onClick={createProducts}
                     >
                         Generate { options.count } Products
@@ -49,3 +47,5 @@ const ProductCreator = () => {
         </Layout>
     );
 };
+
+export default ProductCreator
