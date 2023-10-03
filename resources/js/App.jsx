@@ -7,7 +7,6 @@ import useAxios from "./hooks/useAxios";
 import ProductCreator from "./components/ProductCreator";
 
 const App = () => {
-    const { axios } = useAxios
     const [appBridgeConfig] = useState(() => {
         const host =
             new URLSearchParams(location.search).get("host") ||

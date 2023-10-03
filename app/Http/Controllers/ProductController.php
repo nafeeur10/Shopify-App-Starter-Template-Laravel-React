@@ -10,5 +10,6 @@ class ProductController extends Controller
     public function store(CreateProductRequest $request)
     {
         $data = $request->validated();
+        return response()->noContent();
     }
 }

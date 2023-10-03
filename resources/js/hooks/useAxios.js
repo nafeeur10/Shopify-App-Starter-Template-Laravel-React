@@ -4,11 +4,15 @@ import { useEffect } from "react"
 import { getSessionToken } from '@shopify/app-bridge/utilities'
 
 const useAxios = () => {
+    console.log("Clicking-------------")
     const app = useAppBridge()
     useEffect(() => {
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-        const interceptor = axios.interceptors.request.use(function(config) {
+        console.log("Clicking 2--------------")
+        const interceptor = axios.interceptors.request.use(function (config) {
             return getSessionToken(app).then(token => {
+                console.log("Token------------------")
+                console.log(token);
                 config.headers.Authorization = `Bearer ${token}`
                 return config;
             })
