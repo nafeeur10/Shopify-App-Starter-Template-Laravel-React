@@ -17,25 +17,17 @@ const ProductCreator = () => {
     );
 
     const createProducts = useCallback(() => {
-        console.log("Calling--------------");
         axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-
-        // Add a request interceptor
-        let ax = axios.interceptors.request.use(function (config) {
-                return getSessionToken(app).then((token) => {
-                    config.headers.Authorization = `Bearer ${token}`
-                    console.log(token);
-                    return config;
-                })
+        axios.interceptors.request.use(function (config) {
+            return getSessionToken(app).then((token) => {
+                config.headers.Authorization = `Bearer ${token}`
                 return config;
-            },
+            })},
             function (error) {
-                // Do something with request error
                 return Promise.reject(error);
             }
         );
 
-        // Add a response interceptor
         axios.interceptors.response.use(
             function (response) {
                 return response;
@@ -45,15 +37,6 @@ const ProductCreator = () => {
             }
         );
 
-        // axios.interceptors.request.use(function (config) {
-        //     console.log("Inside interceptors-----------");
-        //     return getSessionToken(app).then((token) => {
-        //         console.log("Token------------------");
-        //         console.log(token);
-        //         config.headers.Authorization = `Bearer ${token}`;
-        //         return config;
-        //     });
-        // });
         axios.post("/products", options).then(response => {
             console.log("After calling post request--------------");
             console.log(response)

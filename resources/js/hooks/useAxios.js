@@ -14,6 +14,8 @@ const useAxios = () => {
                 console.log("Token------------------")
                 console.log(token);
                 config.headers.Authorization = `Bearer ${token}`
+                console.log("Config:--------------");
+                console.log(config);
                 return config;
             })
         })
