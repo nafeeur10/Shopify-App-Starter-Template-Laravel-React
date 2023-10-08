@@ -4,11 +4,14 @@ import axios from "axios";
 import { Button, FormLayout, Layout, RangeSlider } from "@shopify/polaris";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { getSessionToken } from "@shopify/app-bridge/utilities";
+import ValidationErrorBanner from "./ValidationErrorBanner";
 
 const ProductCreator = () => {
     // const { axios } = useAxios();
     const [options, setOptions] = useState({ count: 5 });
     const app = useAppBridge();
+    const [errors, setErrors] = useState([]);
+    const [creatingProducts, setCreatingProucts] = useState(false)
 
     const handleCountChange = useCallback(
         (value) =>
@@ -17,6 +20,8 @@ const ProductCreator = () => {
     );
 
     const createProducts = useCallback(() => {
+        setCreatingProucts(true)
+        setErrors([])
         axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
         axios.interceptors.request.use(function (config) {
             return getSessionToken(app).then((token) => {
@@ -38,10 +43,16 @@ const ProductCreator = () => {
         );
 
         axios.post("/products", options).then(response => {
+            
             console.log("After calling post request--------------");
             console.log(response)
+        }).catch( error => {
+            setCreatingProucts(false)
+            if(error?.response?.status === 422) {
+                setErrors(Object.values(error.response.data.errors || {}).flatMap(errors => errors));
+            }
         })
-    });
+    }, [options]);
 
     return (
         <Layout>
@@ -61,9 +72,11 @@ const ProductCreator = () => {
                         onChange={handleCountChange}
                         id="productsCount"
                     />
-                    <Button primary size="large" onClick={createProducts}>
+                    <Button primary size="large" onClick={createProducts} loading={creatingProducts}>
                         Generate {options.count} Products
                     </Button>
+                    { errors.length && <ValidationErrorBanner title="Failed to Create Products" errors={errors} onDismiss={() => setErrors([])}/>
+                    }
                 </FormLayout>
             </Layout.Section>
         </Layout>
