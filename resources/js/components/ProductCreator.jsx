@@ -46,6 +46,7 @@ const ProductCreator = () => {
             
             console.log("After calling post request--------------");
             console.log(response)
+            setCreatingProucts(false)
         }).catch( error => {
             setCreatingProucts(false)
             if(error?.response?.status === 422) {

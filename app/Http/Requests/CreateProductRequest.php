@@ -9,7 +9,7 @@ class CreateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'count' => ['required', 'integer', 'min:10', 'max:100']
+            'count' => ['required', 'integer', 'min:5', 'max:100']
         ];
     }
 }
