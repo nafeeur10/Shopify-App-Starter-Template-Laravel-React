@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Middleware\Billabe;
+use App\Http\Middleware\CheckAccessScopes;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('verify.shopify')->group(function() {
+Route::middleware(['verify.shopify', CheckAccessScopes::class, Billabe::class])->group(function() {
     Route::view('/', 'app')->name('home');
     Route::post('/products', [ProductController::class, 'store']);
 });

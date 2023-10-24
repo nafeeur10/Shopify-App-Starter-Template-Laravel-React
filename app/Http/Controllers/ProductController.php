@@ -21,13 +21,14 @@ class ProductController extends Controller
 
         /** @var ShopModel $shop */
         $shop = $request->user();
+        $productResource = [
+            "title" => "Good Product",
+            "body_html" => "<strong>Good snowboard!</strong>"
+        ];
 
         $request = $shop->api()->rest(
             'POST','/admin/api/products.json',[
-                'product' => [
-                    "title" => "Free Product",
-                    "body_html" => "<strong>Good snowboard!</strong>"
-                ]
+                'product' => $productResource
             ]
         );
         return $this->responseFactory->json($request['body']['product']);
