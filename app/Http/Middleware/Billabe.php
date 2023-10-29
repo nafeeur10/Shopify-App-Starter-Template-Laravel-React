@@ -37,7 +37,12 @@ class Billabe
                 ])
             );
 
-            return response()->json(['forceRedirectUrl' => $redicrectUrl], 403);
+            return response()->json([
+                'plan' => $shop->plan,
+                'freemium' => $shop->isFreemium(),
+                'GrandFathered' => $shop->isGrandfathered(),
+                'forceRedirectUrl' => $redicrectUrl
+            ], 403);
         }
 
         return $next($request);

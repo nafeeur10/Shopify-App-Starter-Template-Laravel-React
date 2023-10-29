@@ -1,63 +1,121 @@
-import { useCallback, useState } from "react";
-import useAxios from "../hooks/useAxios";
-import { Button, FormLayout, Layout, RangeSlider } from "@shopify/polaris";
-import { useAppBridge } from "@shopify/app-bridge-react";
-import { getSessionToken } from "@shopify/app-bridge/utilities";
-import ValidationErrorBanner from "./ValidationErrorBanner";
+import {
+    Button,
+    FormLayout,
+    Frame,
+    HorizontalGrid, Icon,
+    Layout,
+    Page,
+    RangeSlider, SkeletonDisplayText,
+    Toast,
+    Tooltip,
+    Text,
+    HorizontalStack
+}                                           from '@shopify/polaris'
+import { useCallback, useEffect, useState } from 'react'
+import ValidationErrorBanner                from './ValidationErrorBanner';
+import DeleteFakeDataButton                 from './DeleteFakeDataButton';
+import useGenerateFakeData                  from '../hooks/useGenerateFakeData';
+import ManagePremiumButton                  from './ManagePremiumButton';
+import useAxios                             from '../hooks/useAxios';
+import { StarFilledMinor }                  from '@shopify/polaris-icons';
 
-const ProductCreator = () => {
-    const { axios } = useAxios();
-    const [options, setOptions] = useState({ count: 5 });
-    const app = useAppBridge();
-    const [errors, setErrors] = useState([]);
-    const [creatingProducts, setCreatingProucts] = useState(false)
+const FakeDataCreator = () => {
+    const [options, setOptions]       = useState({
+        productsCount: 0,
+        customersCount: 0
+    })
+    const {
+              generate,
+              toastMessage,
+              loading: creatingProducts,
+              errors,
+              dismissErrors,
+              dismissToast
+          }                           = useGenerateFakeData()
+    const [hasPremium, setHasPremium] = useState(null)
+    const {axios}                     = useAxios()
+
+    useEffect(() => {
+        axios.get('/premium').then(response => {
+            setHasPremium(response.data.hasPremium)
+        })
+    }, [])
 
     const handleCountChange = useCallback(
-        (value) =>
-            setOptions((prevOptions) => ({ ...prevOptions, count: value })),
+        (value, name) => setOptions(prevOptions => ({...prevOptions, [name]: value})),
         []
-    );
+    )
 
-    const createProducts = useCallback(() => {
-        setCreatingProucts(true)
-        setErrors([])
-        axios.post("/products", options).then(response => {
-            setCreatingProucts(false)
-        }).catch( error => {
-            setCreatingProucts(false)
-            if(error?.response?.status === 422) {
-                setErrors(Object.values(error.response.data.errors || {}).flatMap(errors => errors));
-            }
-        })
-    }, [options]);
+    const premiumIcon = <Icon source={ StarFilledMinor } color="success" />
+
+    const primaryActionButtons = (
+        <>
+            <HorizontalGrid gap="2" columns="2">
+                { hasPremium === null
+                    ? <SkeletonDisplayText size="extraLarge" />
+                    : <ManagePremiumButton hasPremium={ hasPremium } icon={ premiumIcon } /> }
+                <DeleteFakeDataButton />
+            </HorizontalGrid>
+        </>
+    )
+
+    const customersLabel = (
+        <HorizontalStack wrap={ false } gap="1">
+            Number of Customers { options.customersCount > 0 ? '(' + options.customersCount + ')' : '' }
+            { hasPremium ? null : (
+                <Tooltip dismissOnMouseOut content="This feature is only available for premium plan.">
+                    <Text fontWeight="bold" as="span">
+                        { premiumIcon }
+                    </Text>
+                </Tooltip>
+            ) }
+        </HorizontalStack>
+    )
 
     return (
-        <Layout>
-            <Layout.Section>
-                <FormLayout>
-                    <RangeSlider
-                        output
-                        label={`Number of Products ${
-                            options.productsCount > 0
-                                ? "(" + options.productsCount + ")"
-                                : ""
-                        }`}
-                        min={0}
-                        max={100}
-                        step={5}
-                        value={options.count}
-                        onChange={handleCountChange}
-                        id="productsCount"
-                    />
-                    <Button primary size="large" onClick={createProducts} loading={creatingProducts}>
-                        Generate {options.count} Products
-                    </Button>
-                    { errors.length && <ValidationErrorBanner title="Failed to Create Products" errors={errors} onDismiss={() => setErrors([])}/>
-                    }
-                </FormLayout>
-            </Layout.Section>
-        </Layout>
-    );
-};
+        <Frame>
+            <Page title="Generate Fake Data" primaryAction={ primaryActionButtons }>
+                <Layout>
+                    <Layout.Section>
+                        <FormLayout>
+                            <RangeSlider
+                                output
+                                label={ `Number of Products ${ options.productsCount > 0 ? '(' + options.productsCount + ')' : '' }` }
+                                min={ 0 }
+                                max={ 100 }
+                                step={ 5 }
+                                value={ options.productsCount }
+                                onChange={ handleCountChange }
+                                id="productsCount"
+                            />
+                            <RangeSlider
+                                output
+                                disabled={ ! hasPremium }
+                                label={ customersLabel }
+                                min={ 0 }
+                                max={ 100 }
+                                step={ 5 }
+                                value={ options.customersCount }
+                                onChange={ handleCountChange }
+                                id="customersCount"
+                            />
+                            <Button primary size="large" loading={ creatingProducts }
+                                    onClick={ () => generate(options) }>Generate</Button>
+                            { toastMessage &&
+                                <Toast content={ toastMessage } onDismiss={ dismissToast } /> }
+                            { errors.length && (
+                                <ValidationErrorBanner
+                                    title="Failed to Generate Fake Data"
+                                    errors={ errors }
+                                    onDismiss={ dismissErrors }
+                                />
+                            ) }
+                        </FormLayout>
+                    </Layout.Section>
+                </Layout>
+            </Page>
+        </Frame>
+    )
+}
 
-export default ProductCreator;
+export default FakeDataCreator

@@ -1,10 +1,12 @@
-import { useAppBridge } from "@shopify/app-bridge-react"
+import { useAppBridge, useNavigate } from "@shopify/app-bridge-react"
 import axios from "axios"
 import { useEffect } from "react"
 import { getSessionToken } from '@shopify/app-bridge/utilities'
 
 const useAxios = () => {
-    const app = useAppBridge()
+    const app = useAppBridge();
+    const navigate = useNavigate();
+    
     useEffect(() => {
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         const interceptor = axios.interceptors.request.use(function (config) {
