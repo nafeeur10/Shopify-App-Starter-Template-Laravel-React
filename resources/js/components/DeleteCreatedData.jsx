@@ -2,7 +2,7 @@ import { Button, Toast } from '@shopify/polaris';
 import { useState }      from 'react';
 import useAxios          from '../hooks/useAxios';
 
-const DeleteFakeDataButton = () => {
+const DeleteCreatedData = () => {
     const [loading, setLoading]           = useState(false)
     const {axios}                         = useAxios()
     const [toastMessage, setToastMessage] = useState('')
@@ -27,4 +27,4 @@ const DeleteFakeDataButton = () => {
     )
 }
 
-export default DeleteFakeDataButton
+export default DeleteCreatedData

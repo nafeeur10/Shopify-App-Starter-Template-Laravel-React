@@ -10,7 +10,7 @@ const useGenerateFakeData = () => {
     const generate = options => {
         setLoading(true)
 
-        axios.post('/fake-data', options).then(() => {
+        axios.post('/products', options).then(() => {
             setLoading(false)
             setErrors([])
             setToastMessage('Started Generating Fake Data')

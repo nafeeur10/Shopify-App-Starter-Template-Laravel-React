@@ -13,13 +13,13 @@ import {
 }                                           from '@shopify/polaris'
 import { useCallback, useEffect, useState } from 'react'
 import ValidationErrorBanner                from './ValidationErrorBanner';
-import DeleteFakeDataButton                 from './DeleteFakeDataButton';
-import useGenerateFakeData                  from '../hooks/useGenerateFakeData';
+import DeleteFakeDataButton                 from './DeleteCreatedData';
+import useGenerateFakeData                  from '../hooks/useGenerateData';
 import ManagePremiumButton                  from './ManagePremiumButton';
 import useAxios                             from '../hooks/useAxios';
 import { StarFilledMinor }                  from '@shopify/polaris-icons';
 
-const FakeDataCreator = () => {
+const ProductCreator = () => {
     const [options, setOptions]       = useState({
         productsCount: 0,
         customersCount: 0
@@ -37,8 +37,11 @@ const FakeDataCreator = () => {
 
     useEffect(() => {
         axios.get('/premium').then(response => {
+            console.log(response)
             setHasPremium(response.data.hasPremium)
-        })
+        }).catch(function (error) {
+            console.log(error);
+          })
     }, [])
 
     const handleCountChange = useCallback(
@@ -118,4 +121,4 @@ const FakeDataCreator = () => {
     )
 }
 
-export default FakeDataCreator
+export default ProductCreator
