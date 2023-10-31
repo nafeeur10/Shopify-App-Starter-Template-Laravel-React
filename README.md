@@ -1,6 +1,6 @@
 ## Shopify App Starter Template with Laravel and React
 
-Created this solution with this https://github.com/Kyon147/laravel-shopify open source solution. Added React as a front end technologies. It also supports SPA. Let's describe in details about this solution. It might be helpful for everyone who want to build Shopify App with Laravel and React
+Created this solution with this https://github.com/Kyon147/laravel-shopify open source solution. Added React as a front-end technologies. It also supports SPA. Let's describe this in detail about this solution. It might be helpful for everyone who wants to build a Shopify App with Laravel and React
 
 ### Prerequisite
  - Composer
@@ -86,7 +86,7 @@ class User extends Authenticatable implements IShopModel
 
 ### Connect with Shopify
 
- - ![Collect Shopify App Credentials](https://ibb.co/Gd0DKK6)
+ - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/40a03825-6ea3-48fb-8ff8-feac5fe2106d)
 
  - Edit .env file
    SHOPIFY_APP_NAME=App_Name
@@ -101,11 +101,7 @@ class User extends Authenticatable implements IShopModel
  - npm run dev
  - ngrok http 8000 (If the port is 8000)
  - Put ngrok URL to Shopify URL part 
-   ![Shopify URL](https://ibb.co/m843bpR)
+   ![Shopify URL](https://github.com/nafeeur10/app/assets/10268310/aaff4e66-b7a3-468a-968d-bc42e28d5910)
 
 
 Now you can test the Shopify app with the store.....
-
-
-
-
