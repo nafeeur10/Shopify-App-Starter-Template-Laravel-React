@@ -89,7 +89,7 @@ class User extends Authenticatable implements IShopModel
  - Need a Partner Account
  - Create an APP Manually
  - Collect the credentials
- - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/d2ebc7d4-ec92-40b4-80d8-fb4f119c9425)
+ - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/40a03825-6ea3-48fb-8ff8-feac5fe2106d)
 
  - Edit .env file
  ```
@@ -106,7 +106,7 @@ class User extends Authenticatable implements IShopModel
  - `npm run dev`
  - `ngrok http 8000` (If the port is 8000)
  - Put ngrok URL to Shopify URL part 
-   ![Shopify URL](https://github.com/nafeeur10/app/assets/10268310/40a03825-6ea3-48fb-8ff8-feac5fe2106d)
+   ![Shopify URL](https://github.com/nafeeur10/app/assets/10268310/d381127e-e0ec-4ea7-a32d-5e0c8945fe3a)
 
 
 ### Setup SPA with React
