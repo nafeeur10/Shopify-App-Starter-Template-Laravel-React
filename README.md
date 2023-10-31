@@ -89,7 +89,7 @@ class User extends Authenticatable implements IShopModel
  - Need a Partner Account
  - Create an APP Manually
  - Collect the credentials
- - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/d381127e-e0ec-4ea7-a32d-5e0c8945fe3a)
+ - ![Collect Shopify App Credentials](https://cdn-lab.s3.us-east-2.amazonaws.com/credentials.png)
 
  - Edit .env file
  ```
