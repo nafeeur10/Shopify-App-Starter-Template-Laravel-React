@@ -86,7 +86,7 @@ class User extends Authenticatable implements IShopModel
 
 ### Connect with Shopify
 
- - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/aaff4e66-b7a3-468a-968d-bc42e28d5910)
+ - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/d2ebc7d4-ec92-40b4-80d8-fb4f119c9425)
 
  - Edit .env file
  ```
