@@ -86,7 +86,7 @@ class User extends Authenticatable implements IShopModel
 
 ### Connect with Shopify
 
- - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/40a03825-6ea3-48fb-8ff8-feac5fe2106d)
+ - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/aaff4e66-b7a3-468a-968d-bc42e28d5910)
 
  - Edit .env file
    SHOPIFY_APP_NAME=App_Name
@@ -101,7 +101,7 @@ class User extends Authenticatable implements IShopModel
  - npm run dev
  - ngrok http 8000 (If the port is 8000)
  - Put ngrok URL to Shopify URL part 
-   ![Shopify URL](https://github.com/nafeeur10/app/assets/10268310/aaff4e66-b7a3-468a-968d-bc42e28d5910)
+   ![Shopify URL](https://github.com/nafeeur10/app/assets/10268310/40a03825-6ea3-48fb-8ff8-feac5fe2106d)
 
 
 Now you can test the Shopify app with the store.....
