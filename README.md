@@ -8,9 +8,9 @@ Created this solution with this https://github.com/Kyon147/laravel-shopify open 
  - Ngrok (for local development)
 
 ### Install Laravel and Integrate the package
- - composer create-project laravel/laravel shopify-app
- - composer require kyon147/laravel-shopify
- - php artisan vendor:publish --tag=shopify-config
+ - `composer create-project laravel/laravel shopify-app`
+ - `composer require kyon147/laravel-shopify`
+ - `php artisan vendor:publish --tag=shopify-config`
 
 ### CSRF
 
@@ -89,17 +89,19 @@ class User extends Authenticatable implements IShopModel
  - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/aaff4e66-b7a3-468a-968d-bc42e28d5910)
 
  - Edit .env file
+ ```
    SHOPIFY_APP_NAME=App_Name
    VITE_SHOPIFY_API_KEY=
    SHOPIFY_API_KEY=
    SHOPIFY_API_SECRET=
+```
 
 ### Start the Project
 
- - php artisan migrate
- - npm install
- - npm run dev
- - ngrok http 8000 (If the port is 8000)
+ - `php artisan migrate`
+ - `npm install`
+ - `npm run dev`
+ - `ngrok http 8000` (If the port is 8000)
  - Put ngrok URL to Shopify URL part 
    ![Shopify URL](https://github.com/nafeeur10/app/assets/10268310/40a03825-6ea3-48fb-8ff8-feac5fe2106d)
 
