@@ -89,14 +89,27 @@ class User extends Authenticatable implements IShopModel
  - Need a Partner Account
  - Create an APP Manually
  - Collect the credentials
- - ![Collect Shopify App Credentials](https://cdn-lab.s3.us-east-2.amazonaws.com/credentials.png)
+ - ![Collect Shopify App Credentials](https://github.com/nafeeur10/app/assets/10268310/75c3eb21-11e1-45dc-a997-e47723413c41)
 
  - Edit .env file
  ```
-   SHOPIFY_APP_NAME=App_Name
-   VITE_SHOPIFY_API_KEY=
-   SHOPIFY_API_KEY=
-   SHOPIFY_API_SECRET=
+SHOPIFY_APP_NAME=App_Name
+VITE_SHOPIFY_API_KEY=
+SHOPIFY_API_KEY=
+SHOPIFY_API_SECRET=
+```
+
+### Connect to Database
+
+ - Create a MySQL database
+ - Put the DB Credentials like below
+ ```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=starter
+DB_USERNAME=root
+DB_PASSWORD=1234
 ```
 
 ### Start the Project
@@ -106,7 +119,7 @@ class User extends Authenticatable implements IShopModel
  - `npm run dev`
  - `ngrok http 8000` (If the port is 8000)
  - Put ngrok URL to Shopify URL part 
-   ![Shopify URL](https://cdn-lab.s3.us-east-2.amazonaws.com/ngrok+setup.png)
+   ![Shopify URL](https://github.com/nafeeur10/app/assets/10268310/9c3034fb-63d6-48cb-ab82-c627d02e4ee7)
 
 
 ### Setup SPA with React
