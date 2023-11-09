@@ -171,4 +171,13 @@ plugins: [
 ]
 ```
 
+### Add Axios to resources/js/bootstrap.js
+
+```
+import axios from 'axios';
+window.axios = axios;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+```
+
+
 Now you can test the Shopify app with the store.....
